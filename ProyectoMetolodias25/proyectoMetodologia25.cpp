@@ -12,6 +12,7 @@ struct Producto{
 Producto productoLista[100] = {};
 void registrarProductos(){
     int cantidadProductos = 0;
+    int conteo = 1;
     cout << "¿Cuántos productos desea registrar?: "<<endl;
     cin >> cantidadProductos;
     int totalRegistro = contadorProductos + cantidadProductos;
@@ -21,6 +22,8 @@ void registrarProductos(){
                 cout <<"Limite de productos alcanzado"<<endl;
                 break;
             }
+            cout << "Producto" << conteo <<endl;
+            
             cout << "Nombre" <<endl;
             cin >> productoLista[i].nombre;
             cout << "Precio" <<endl;
@@ -29,6 +32,7 @@ void registrarProductos(){
             cin >> productoLista[i].cantidad;
             cout << "\n"<<endl;
             contadorProductos+=1;
+            conteo++;
         }
     }
     else
@@ -41,7 +45,6 @@ void mostrarProductos(){
     for(int i=0;i < tamanoProducto;i++){
         if(productoLista[i].nombre != "" && productoLista[i].precio != 0.0)
         if(productoLista[i].cantidad != 0){
-            cout << "Producto: " << i + 1 <<endl;
             cout << "Nombre: "<< productoLista[i].nombre <<endl;
             cout << "Precio: "<< productoLista[i].precio <<endl;
             cout << "Cantidad: " <<productoLista[i].cantidad<<endl;
@@ -52,8 +55,8 @@ void mostrarProductos(){
 void ordenarBurbuja(){
     int i,j;
     Producto aux;
-    for(i=0;i<tamanoProducto;i++){
-        for(j=0;j<tamanoProducto;j++){
+    for(i=0;i<tamanoProducto - 1;i++){
+        for(j=0;j<tamanoProducto - 1 - i;j++){
             if(productoLista[j].precio > productoLista[j+1].precio){
                 aux = productoLista[j];
                 productoLista[j] = productoLista[j+1];
@@ -93,36 +96,77 @@ void ordenarInsercion(){
     }
 }
 
-void ordenarBurbujaOriginal(){
-    int arreglo[] = {6,3,5};
-    int i,j,aux;
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
-            if(arreglo[j] > arreglo[j+1]){
-                aux = arreglo[j];
-                arreglo[j] = arreglo[j+1];
-                arreglo[j+1] = aux;
-            }
+void buscarProductos(){
+    string busqueda;
+    cout << "Ingrese el nombre a buscar: "<<endl;
+    cin >> busqueda;
+    cout << "Producto encontrado:"<<endl;
+    for(int i=0;i < tamanoProducto;i++){ 
+        if(productoLista[i].nombre == busqueda){
+            cout << "Nombre: " << productoLista[i].nombre <<endl;
+            cout << "Precio: " << productoLista[i].precio <<endl;
+            cout << "Cantidad: " << productoLista[i].cantidad <<endl;
         }
-        for(int x=0;x<3;x++){
-            cout << arreglo[x];
+    }
+}
+
+void buscarProducto(){
+    string busqueda;
+    cout << "Ingrese el nombre a buscar: "<<endl;
+    cin >> busqueda;
+    cout << "Producto encontrado:"<<endl;
+    for(int i=0;i < tamanoProducto;i++){ 
+        if(productoLista[i].nombre == busqueda){
+            cout << "Nombre: " << productoLista[i].nombre <<endl;
+            cout << "Precio: " << productoLista[i].precio <<endl;
+            cout << "Cantidad: " << productoLista[i].cantidad <<endl;
+            break;
         }
-        cout<<"\n";
+    }
+}
+
+void actualizarProducto(){
+    int i = 0;
+    int opcion = 0;
+    while(true){
+        cout << "Ingrese el índice del producto a actualizar:" <<endl;
+        cin >> i;
+        if(i => tamanoProducto){
+        cout << "No se encuentra esa posicion";
+        }
+        else{
+            break;
+        }
+    }
+    cout << "¿Qué desea actualizar?"<<endl;
+    cout << "1. Precio"<<endl;
+    cout << "2. Cantidad"<<endl;
+    cout << "Opción:" <<endl;
+    cin >> opcion;
+    cout << "Nueva cantidad:"<<endl;
+    switch(opcion){
+        case 1:
+            cin >> productoLista[i].precio;
+            break;
+        case 2:
+            cin >> productoLista[i].cantidad;
+            break;
+        default:
+            break;
     }
 }
 
 
 int main()
 {
-    /*for(int i=0;i < 2;i++){
-        registrarProductos();
-    }
-    mostrarProductos();*/
-    /*ordenarBurbuja();*/
-    /*ordenarSeleccion();*/
+    registrarProductos();
     //ordenarBurbuja();
     //ordenarSeleccion();
     //ordenarInsercion();
-    ordenarBurbujaOriginal();
+    //mostrarProductos();
+    //buscarProductos();
+    //buscarProducto();
+    actualizarProducto();
+    mostrarProductos();
     return 0;
 }
