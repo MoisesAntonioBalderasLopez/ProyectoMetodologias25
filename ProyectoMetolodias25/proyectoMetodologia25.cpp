@@ -131,7 +131,7 @@ void actualizarProducto(){
     while(true){
         cout << "Ingrese el índice del producto a actualizar:" <<endl;
         cin >> i;
-        if(i => tamanoProducto){
+        if(i >= tamanoProducto){
         cout << "No se encuentra esa posicion";
         }
         else{
